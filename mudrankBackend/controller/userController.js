@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../model/User");
 
-const registerUser = async (req, res) => {
+const registerUser = asyncHandler(async (req, res) => {
   const { name, phone, message } = req.body;
 
   const userExists = await User.findOne({ phone });
@@ -25,6 +25,6 @@ const registerUser = async (req, res) => {
     res.status(400);
     throw new Error("INVALID USER DATA");
   }
-};
+});
 
 module.exports = registerUser;
